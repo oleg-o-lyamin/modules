@@ -1,0 +1,6 @@
+node_modules/*
+!node_modules/howler
+node_modules/howler/*
+!node_modules/howler/dist
+node_modules/howler/dist/*
+!node_modules/howler/dist/howler.js
