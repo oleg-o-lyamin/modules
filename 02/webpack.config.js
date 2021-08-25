@@ -1,7 +1,8 @@
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const { resolve } = require('path');
-const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 module.exports = {
     entry: './src/main.js',
@@ -16,12 +17,17 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                use: ['style-loader', 'css-loader'],
+                use: [MiniCssExtractPlugin.loader, 'css-loader'],
             }
         ]
     },
     plugins: [
-        new HtmlWebpackPlugin({ template: resolve(__dirname, 'index.html') })
-        //new BundleAnalyzerPlugin(),
-    ]
+        new HtmlWebpackPlugin({ template: resolve(__dirname, 'index.html') }),
+        new MiniCssExtractPlugin()
+    ],
+    optimization: {
+        minimizer: [
+            new CssMinimizerPlugin(),
+        ]
+    }
 };
